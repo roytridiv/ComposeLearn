@@ -11,6 +11,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -66,21 +68,27 @@ fun Greeting(name: String) {
 @Composable
 fun HelloWorld() {
     val context = LocalContext.current
+    val expand = remember {
+        mutableStateOf(false)
+    }
+    val extraPadding = if (expand.value) 48.dp else 0.dp
     Surface(
         color = MaterialTheme.colors.secondary,
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
     ) {
         Row(modifier = Modifier.padding(14.dp)) {
-            Row (modifier = Modifier.weight(2f)) {
+            Row (modifier = Modifier.weight(2f).padding(top = extraPadding, bottom = 20.dp)) {
                 Text(text = "Hello, ")
                 Text(text = "Compose Learn Code")
             }
             Button(
                 onClick = {
-                    Toast.makeText( context, "Button Pressed", Toast.LENGTH_SHORT).show()
+                    expand.value = !expand.value
+
                 }
             ) {
-                Text("Show more")
+                Toast.makeText( context, "Button Pressed", Toast.LENGTH_SHORT).show()
+                Text(if (expand.value) "Show less" else "Show more")
             }
         }
     }
