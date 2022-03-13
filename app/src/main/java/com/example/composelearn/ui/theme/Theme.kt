@@ -1,5 +1,6 @@
 package com.example.composelearn.ui.theme
 
+import android.graphics.Color
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
@@ -13,10 +14,12 @@ private val DarkColorPalette = darkColors(
 )
 
 private val LightColorPalette = lightColors(
-    primary = Purple500,
     primaryVariant = Purple700,
-    secondary = Teal200
-
+    secondary = Teal200,
+    surface = Blue,
+    onSurface = androidx.compose.ui.graphics.Color.White,
+    primary = LightBlue,
+    onPrimary = Navy
     /* Other default colors to override
     background = Color.White,
     surface = Color.White,
@@ -45,3 +48,10 @@ fun ComposeLearnTheme(
         content = content
     )
 }
+
+//private val LightColorPalette = lightColors(
+//    surface = Blue,
+//    onSurface = Color.White,
+//    primary = LightBlue,
+//    onPrimary = Navy
+//)
